@@ -76,14 +76,14 @@ true
 Set sonarqube.jvmOpts
 */}}
 {{- define "sonarqube.jvmOpts" -}}
-{{- if and .Values.caCerts .Values.prometheusExporter.enabled -}}
-{{ printf "-javaagent:%s/data/jmx_prometheus_javaagent.jar=%d:%s/conf/prometheus-config.yaml -Djavax.net.ssl.trustStore=%s/certs/cacerts %s" .Values.sonarqubeFolder (int .Values.prometheusExporter.webBeanPort) .Values.sonarqubeFolder .Values.sonarqubeFolder .Values.jvmOpts | trim | quote }}
+{{- if and .Values.caCerts .Values.ApplicationNodes.prometheusExporter.enabled -}}
+{{ printf "-javaagent:%s/data/jmx_prometheus_javaagent.jar=%d:%s/conf/prometheus-config.yaml -Djavax.net.ssl.trustStore=%s/certs/cacerts %s" .Values.sonarqubeFolder (int .Values.ApplicationNodes.prometheusExporter.webBeanPort) .Values.sonarqubeFolder .Values.sonarqubeFolder .Values.ApplicationNodes.jvmOpts | trim | quote }}
 {{- else if .Values.caCerts -}}
-{{ printf "-Djavax.net.ssl.trustStore=%s/certs/cacerts %s" .Values.sonarqubeFolder .Values.jvmOpts | trim | quote }}
-{{- else if .Values.prometheusExporter.enabled -}}
-{{ printf "-javaagent:%s/data/jmx_prometheus_javaagent.jar=%d:%s/conf/prometheus-config.yaml %s" .Values.sonarqubeFolder (int .Values.prometheusExporter.webBeanPort) .Values.sonarqubeFolder .Values.jvmOpts | trim | quote }}
+{{ printf "-Djavax.net.ssl.trustStore=%s/certs/cacerts %s" .Values.sonarqubeFolder .Values.ApplicationNodes.jvmOpts | trim | quote }}
+{{- else if .Values.ApplicationNodes.prometheusExporter.enabled -}}
+{{ printf "-javaagent:%s/data/jmx_prometheus_javaagent.jar=%d:%s/conf/prometheus-config.yaml %s" .Values.sonarqubeFolder (int .Values.ApplicationNodes.prometheusExporter.webBeanPort) .Values.sonarqubeFolder .Values.ApplicationNodes.jvmOpts | trim | quote }}
 {{- else -}}
-{{ printf "%s" .Values.jvmOpts }}
+{{ printf "%s" .Values.ApplicationNodes.jvmOpts }}
 {{- end -}}
 {{- end -}}
 
@@ -91,14 +91,14 @@ Set sonarqube.jvmOpts
 Set sonarqube.jvmCEOpts
 */}}
 {{- define "sonarqube.jvmCEOpts" -}}
-{{- if and .Values.caCerts .Values.prometheusExporter.enabled -}}
-{{ printf "-javaagent:%s/data/jmx_prometheus_javaagent.jar=%d:%s/conf/prometheus-ce-config.yaml -Djavax.net.ssl.trustStore=%s/certs/cacerts %s" .Values.sonarqubeFolder (int .Values.prometheusExporter.ceBeanPort) .Values.sonarqubeFolder .Values.sonarqubeFolder .Values.jvmCeOpts | trim | quote }}
+{{- if and .Values.caCerts .Values.ApplicationNodes.prometheusExporter.enabled -}}
+{{ printf "-javaagent:%s/data/jmx_prometheus_javaagent.jar=%d:%s/conf/prometheus-ce-config.yaml -Djavax.net.ssl.trustStore=%s/certs/cacerts %s" .Values.sonarqubeFolder (int .Values.ApplicationNodes.prometheusExporter.ceBeanPort) .Values.sonarqubeFolder .Values.sonarqubeFolder .Values.ApplicationNodes.jvmCeOpts | trim | quote }}
 {{- else if .Values.caCerts -}}
-{{ printf "-Djavax.net.ssl.trustStore=%s/certs/cacerts %s" .Values.sonarqubeFolder .Values.jvmCeOpts | trim | quote }}
-{{- else if .Values.prometheusExporter.enabled -}}
-{{ printf "-javaagent:%s/data/jmx_prometheus_javaagent.jar=%d:%s/conf/prometheus-ce-config.yaml %s" .Values.sonarqubeFolder (int .Values.prometheusExporter.ceBeanPort) .Values.sonarqubeFolder .Values.jvmCeOpts | trim | quote }}
+{{ printf "-Djavax.net.ssl.trustStore=%s/certs/cacerts %s" .Values.sonarqubeFolder .Values.ApplicationNodes.jvmCeOpts | trim | quote }}
+{{- else if .Values.ApplicationNodes.prometheusExporter.enabled -}}
+{{ printf "-javaagent:%s/data/jmx_prometheus_javaagent.jar=%d:%s/conf/prometheus-ce-config.yaml %s" .Values.sonarqubeFolder (int .Values.ApplicationNodes.prometheusExporter.ceBeanPort) .Values.sonarqubeFolder .Values.ApplicationNodes.jvmCeOpts | trim | quote }}
 {{- else -}}
-{{ printf "%s" .Values.jvmCeOpts }}
+{{ printf "%s" .Values.ApplicationNodes.jvmCeOpts }}
 {{- end -}}
 {{- end -}}
 
@@ -106,9 +106,9 @@ Set sonarqube.jvmCEOpts
 Set prometheusExporter.downloadURL
 */}}
 {{- define "prometheusExporter.downloadURL" -}}
-{{- if .Values.prometheusExporter.downloadURL -}}
-{{ printf "%s" .Values.prometheusExporter.downloadURL }}
+{{- if .Values.ApplicationNodes.prometheusExporter.downloadURL -}}
+{{ printf "%s" .Values.ApplicationNodes.prometheusExporter.downloadURL }}
 {{- else -}}
-{{ printf "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/%s/jmx_prometheus_javaagent-%s.jar" .Values.prometheusExporter.version .Values.prometheusExporter.version }}
+{{ printf "https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/%s/jmx_prometheus_javaagent-%s.jar" .Values.ApplicationNodes.prometheusExporter.version .Values.ApplicationNodes.prometheusExporter.version }}
 {{- end -}}
 {{- end -}}

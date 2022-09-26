@@ -1,8 +1,8 @@
 apiVersion: v1
-name: sonarqube
+name: sonarqube-dce
 description: SonarQube is an open sourced code quality scanning tool
-version: 1.0.13
-appVersion: 8.9-community
+version: 0.0.1
+appVersion: 8.9-datacenter
 keywords:
   - coverage
   - security
